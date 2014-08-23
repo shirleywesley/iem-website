@@ -49,3 +49,4 @@ website/umbraco/
 website/umbraco_client/
 website/App_Data/NuGetBackup/
 website/App_Data/Logs/
+*.suo
