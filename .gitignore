@@ -34,3 +34,16 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+# ===========================
+# custom ignore files and folders
+# ===========================
+website/bin/
+website/obj/
+website/packages/
+website/App_Broswers/
+website/App_Data/TEMP
+website/App_Plugins/
+website/config/splashes/
+website/umbraco/
+website/umbraco_client/
