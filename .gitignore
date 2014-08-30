@@ -50,7 +50,3 @@ website/umbraco_client/
 website/App_Data/NuGetBackup/
 website/App_Data/Logs/
 *.suo
-database/iem-website.bak
-*.mdf
-*.mdf
-*.ldf
