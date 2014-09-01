@@ -33,24 +33,41 @@
                 @* Otherwise, we set the class to null, that way it will not even be added to the <li> element *@
                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
-                                                @foreach (var page in Model.Content.AncestorOrSelf(1).Children.Where("Visible"))
-                                                {
-                                                    <li class="@(page.Children.Where("Visible").Any() ? "dropdown" : null)">
-                                                        <a href="@page.Url">@page.Name</a>
-                                                        @if (page.Children.Where("Visible").Any())
-                                                        {
-                                                        <ul class="dropdown-menu">
-                                                            @foreach (var subpage in page.Children.Where("Visible"))
-                                                            {
-                                                                <li class="@(CurrentPage.Id == page.Id ? "active" : null)"><a href="@subpage.Url">@subpage.Name</a></li>
-                                                            }
-                                                        </ul>
-                                                        }
-                                                    </li>
-                                                }
-                            </ul>
+                        @foreach (var page in Model.Content.AncestorOrSelf(1).Children.Where("Visible"))
+                        {
+                            <li class="@(page.Children.Where("Visible").Any() ? "dropdown" : null)">
+                                <a href="@(page.Children.Where("Visible").Any() ? "javascript:void(0);" : page.Url)">@page.Name</a>
+                                @if (page.Children.Where("Visible").Any())
+                                {
+                                    <ul class="dropdown-menu">
+                                        @foreach (var subpage in page.Children.Where("Visible"))
+                                        {
+                                            <li class="@(CurrentPage.Id == page.Id ? "active" : null)">
+                                                <a href="@subpage.Url">@subpage.Name</a>
 
+                                                @*@if (subpage.Children.Where("Visible").Any())
+                                        {
+                                            <ul class="dropdown-menu">
+                                                @foreach (var subpageChild in subpage.Children.Where("Visible"))
+                                                {
+                                                    <li class="@(CurrentPage.Id == subpageChild.Id ? "active" : null)">
+                                                        <a href="@subpageChild.Url">@subpageChild.Name</a>
+
+
+                                                    </li>
+
+                                                }
+                                            </ul>
+                                        }*@
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    </ul>
                 </div>
+
             </div>
         </div>
     </div>
