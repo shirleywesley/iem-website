@@ -1,0 +1,72 @@
+@using System.Globalization
+@using Library.Shared
+
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{
+    var siteNode = Model.Content.AncestorOrSelf(1);
+
+    var navItems = ExamineQueryManager.GetNavigation("NavigationSearcher", siteNode.Id, "displayInMainNavigation", "sortOrder", true);
+
+    if (navItems.Any())
+    {
+        var pathList = new List<string>(Model.Content.Path.Split(','));
+
+        var macroParams = Model.MacroParameters;
+      
+        var navbarClass = @"<ul class=""nav navbar-nav"">";
+    
+        @Html.Raw(navbarClass)
+
+        foreach (var item in navItems.OrderBy(x => int.Parse(x.Fields["sortOrder"])))
+        {
+            var externalUrlNewWindow = "";
+
+            if (item.Fields.ContainsKey("redirectExternalUrl") && !string.IsNullOrEmpty(item.Fields["redirectExternalUrl"]))
+            {
+                externalUrlNewWindow = item.Fields["redirectExternalUrl"].StartsWith("true", StringComparison.InvariantCultureIgnoreCase)
+                    && item.Fields["redirectExternalUrl"].Trim().Length > 4 ? @"target=""_blank""" : "";
+            }
+
+            var activeClass = pathList.Contains(item.Id.ToString()) ? "active" : "";
+            var childItems = ExamineQueryManager.GetNavigation("NavigationSearcher", item.Id, "displayInMainNavigation", "sortOrder", true);
+
+            var childNav = "";
+            var hasDropdown = "";
+            var dropdownLinkClassAndToggle = "";
+            var caretIndicator = "";
+
+            if (childItems.Any())
+            {
+                childNav += @"<ul class=""dropdown-menu"" role=""menu"">";
+
+                foreach (var childItem in childItems.OrderBy(x => int.Parse(x.Fields["sortOrder"])))
+                {
+                    var childExternalUrlNewWindow = "";
+
+                    if (childItem.Fields.ContainsKey("redirectExternalUrl") && !string.IsNullOrEmpty(childItem.Fields["redirectExternalUrl"]))
+                    {
+                        childExternalUrlNewWindow = childItem.Fields["redirectExternalUrl"].StartsWith("true", StringComparison.InvariantCultureIgnoreCase)
+                            && childItem.Fields["redirectExternalUrl"].Trim().Length > 4 ? @"target=""_blank""" : "";
+                    }
+
+                    var childActiveClass = pathList.Contains(childItem.Id.ToString(CultureInfo.InvariantCulture)) ? "active" : "";
+
+                    childNav += string.Format(@"<li class=""{0}""><a href=""{1}"" {3}>{2}</a></li>", childActiveClass, library.NiceUrl(childItem.Id), childItem.Fields["nodeName"], childExternalUrlNewWindow);
+                }
+
+                childNav += @"</ul>";
+
+                hasDropdown = "dropdown";
+
+                dropdownLinkClassAndToggle = @"class=""dropdown-submenu"" data-toggle=""dropdown"" ";
+               // caretIndicator = @"<span class=""caret""></span>";
+            }
+
+            // @Html.Raw(@"<li class=""divider""></li>")
+            @Html.Raw(string.Format(@"<li class=""{0} {4}""><a href=""{1}"" {5} {6}>{2} </a>{3}</li>", activeClass, library.NiceUrl(item.Id), item.Fields["nodeName"], childNav, hasDropdown, externalUrlNewWindow   , dropdownLinkClassAndToggle))
+        }
+
+        @Html.Raw(@"</ul>")
+    }
+}

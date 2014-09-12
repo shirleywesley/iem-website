@@ -7,9 +7,6 @@
     // First() gets the first ancestor found (the home page, on level 1)
     var homePage = CurrentPage.AncestorsOrSelf(1).First();
 
-    // The menu items we want are all of the children of the homepage
-    // We also check if "Hide in navigation" is on in the menu, we shouldn't show hidden items
-    var menuItems = homePage.Children.Where("UmbracoNaviHide == false");
 }
 
 <div class="wrapper">
@@ -25,7 +22,10 @@
                         <span class="fa fa-bars"></span>
                     </button>
                     <a class="navbar-brand" href="/">
-                        <img id="logo-header" src="assets/img/logo1-default.png" alt="Logo">
+                        @if (homePage.Media("logo") != null)
+                        {
+                            <img id="logo-header" src="@Umbraco.Media(@homePage.Logo).Url" alt="Logo" />
+                        }
                     </a>
                 </div>
 
@@ -33,6 +33,7 @@
                 @* Otherwise, we set the class to null, that way it will not even be added to the <li> element *@
                 <div class="collapse navbar-collapse navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
+                        <li class="@(CurrentPage.Url == "/" ? "active" : null)"><a href="/">@homePage.Name</a></li>
                         @foreach (var page in Model.Content.AncestorOrSelf(1).Children.Where("Visible"))
                         {
                             <li class="@(page.Children.Where("Visible").Any() ? "dropdown" : null)">

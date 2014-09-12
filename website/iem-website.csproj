@@ -221,6 +221,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +246,10 @@
     <Content Include="config\applications.config" />
     <Content Include="config\404handlers.config" />
     <Content Include="Views\Partials\Header.cshtml" />
+    <Content Include="Views\MacroPartials\MainNavigation.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Partials\Test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -255,6 +260,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Pagelayouts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{740d4db7-d0f6-4a14-8ba6-d4429e0bbd34}</Project>
+      <Name>Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
