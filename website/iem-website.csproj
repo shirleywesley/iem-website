@@ -249,7 +249,14 @@
     <Content Include="Views\MacroPartials\MainNavigation.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Partials\Test.cshtml" />
+    <Content Include="config\SiteSettings.config" />
+    <Content Include="Views\IEMWebsiteMaster.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\Base.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
