@@ -30,5 +30,9 @@ namespace Library.Shared
         public static string MetaKeywordsDefault = "metaKeywordsDefault";
         public static string HeaderScripts = "headerScripts";
         public static string FooterScripts = "footerScripts";
+        public static string AboutUsTitleFooter = "aboutTitle";
+        public static string AboutUsDescriptionFooter = "aboutDescription";
+        public static string ContactUsFooter = "contactUsDetails";
+
     }
 }

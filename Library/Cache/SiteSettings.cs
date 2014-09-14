@@ -226,5 +226,50 @@ namespace Library.Cache
             }
         }
 
+
+        /// <summary>
+        /// Gets the About us Title for Footer
+        /// </summary>
+        /// <returns>string representation of the  About us Title</returns>
+        public static string AboutUsTitleFooter
+        {
+            get
+            {
+                var settingsItem = ItemLocator.GetSiteSettingsItem();
+
+                return settingsItem.GetTextFieldValue(UmbracoAliases.AboutUsTitleFooter);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the About us Description for Footer
+        /// </summary>
+        /// <returns>string representation of the  About us Description</returns>
+        public static string AboutUsDescriptionFooter
+        {
+            get
+            {
+                var settingsItem = ItemLocator.GetSiteSettingsItem();
+
+                return settingsItem.GetTextFieldValue(UmbracoAliases.AboutUsDescriptionFooter);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the About us Description for Footer
+        /// </summary>
+        /// <returns>string representation of the  About us Description</returns>
+        public static string ContactUsFooter
+        {
+            get
+            {
+                var settingsItem = ItemLocator.GetSiteSettingsItem();
+
+                return settingsItem.GetTextFieldValue(UmbracoAliases.ContactUsFooter);
+            }
+        }
+
     }
 }

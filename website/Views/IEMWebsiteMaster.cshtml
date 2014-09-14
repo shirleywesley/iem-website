@@ -57,38 +57,14 @@
     </div>
     <!--=== End Header ===-->
     @RenderBody()
+    
+    
+    @{ Html.RenderPartial("Footer"); }
 
-
-    <footer class="site-footer">
-        <div class="container container-inner">
-            <div class="row">
-                <div class="col-md-6">
-                    @*<p class="copyright">@Html.Raw(SiteSettings.FooterCopyright)</p>*@
-                </div>
-                @*<div class="col-md-6">
-                        @{
-                            var footerLinks = SiteSettings.FooterNavigation;
-
-                            if (footerLinks.Any())
-                            {
-                                <ul class="list-inline list-footer-links">
-                                    @foreach (var link in footerLinks)
-                                    {
-                                        if (!string.IsNullOrEmpty(link.Url))
-                                        {
-                                            <li><a href="@link.Url" target="@link.Target">@link.Name</a></li>
-                                        }
-                                    }
-                                </ul>
-                            }
-                        }
-                    </div>*@
-            </div>
-        </div>
-    </footer>
+    
 </div><!--/wrapper-->
-@section Head {
-    @RenderSection("Head", required: false)
+@section HeaderScripts {
+    @RenderSection("HeaderScripts", required: false)
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -114,8 +90,8 @@
     <!-- CSS Customization -->
     <link rel="stylesheet" href="assets/css/custom.css">
 }
-@section Footer {
-    @RenderSection("Footer", required: false)
+@section FooterScripts {
+    @RenderSection("FooterScripts", required: false)
     <!-- JS Global Compulsory -->
     <script type="text/javascript" src="assets/plugins/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>

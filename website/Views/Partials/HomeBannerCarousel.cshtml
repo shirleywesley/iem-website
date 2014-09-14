@@ -1,0 +1,70 @@
+﻿@inherits UmbracoTemplatePage
+
+@{
+    var mediaFolderId = (int)CurrentPage.BannerFolder;
+}
+
+@if (mediaFolderId > 0)
+{
+    var mediaFolder = Umbraco.TypedMedia(mediaFolderId);
+    var banners = mediaFolder.Children(x => x.DocumentTypeAlias == "Banner").ToList();
+
+    <div class="slider-inner">
+        <div id="da-slider" class="da-slider">
+            @foreach (var banner in banners)
+            {
+
+                var link = Umbraco.TypedContent(banner.GetPropertyValue<int>("bannerLink"));
+                var video = banner.GetPropertyValue("videoUrl");
+                
+                <div class="da-slide">
+                    <h2><i>@(banner.GetPropertyValue<string>("title"))</i></h2>
+                    <p> <i>@Html.Raw(banner.GetPropertyValue("description"))</i></p>
+                    
+                 
+
+                        @if (link != null)
+                        {
+                            if (video != null && video != string.Empty)
+                            {
+                                <a href="@link.Url">
+                                    <div class="da-img">
+                                        <iframe src="http://player.vimeo.com/video/@video" width="530" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@link.Url">
+                                    <div class="da-img">
+                                        <img src="@(banner.GetPropertyValue<string>("image"))" />
+                                    </div>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            if (video != null && video != string.Empty)
+                            {
+                                <div class="da-img">
+                                    <iframe src="http://player.vimeo.com/video/@video" width="530" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="da-img">
+                                    <img src="@(banner.GetPropertyValue<string>("image"))" />
+                                </div>
+                            }
+                        }
+
+</div>
+            }
+            <div class="da-arrows">
+                <span class="da-arrows-prev"></span>
+                <span class="da-arrows-next"></span>
+            </div>
+        </div>
+    </div><!--/slider-->
+
+}

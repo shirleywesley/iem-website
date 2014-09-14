@@ -257,6 +257,8 @@
     <Content Include="Views\Base.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Partials\Footer.cshtml" />
+    <Content Include="Views\Partials\HomeBannerCarousel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

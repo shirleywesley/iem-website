@@ -19,14 +19,14 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    @RenderSection("Head", required:false)
+    @RenderSection("HeaderScripts", required:false)
     @*@Html.Raw(DeveloperSettings.HeaderScripts)*@
   </head>
   <body @*@Html.Raw(ViewBag.AdditionalAttributes)>*@
 
     @RenderBody()
 
-    @RenderSection("Footer", required: false)
+    @RenderSection("FooterScripts", required: false)
     @*@Html.Raw(DeveloperSettings.FooterScripts)*@
   </body>
 </html>
